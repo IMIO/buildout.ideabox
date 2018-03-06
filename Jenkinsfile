@@ -29,7 +29,7 @@ pipeline {
                     "${env.BUILD_ID}",
                     "iasmartweb/ideabox",
                     'role::docker::sites$',
-                    '/srv/docker_scripts/website-update-all-images.sh'
+                    'systemctl restart website-ideabox.service'
                 )
             }
         }
