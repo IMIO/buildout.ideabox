@@ -14,7 +14,7 @@ pipeline {
             steps {
                 pushImageToRegistry (
                     "${env.BUILD_ID}",
-                    "iasmartweb/mutual"
+                    "iasmartweb/ideabox"
                 )
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 deployToStaging (
                     "${env.BUILD_ID}",
-                    "iasmartweb/mutual",
+                    "iasmartweb/ideabox",
                     'role::docker::sites$',
                     '/srv/docker_scripts/website-update-all-images.sh'
                 )
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 deployToProd (
                     "${env.BUILD_ID}",
-                    "iasmartweb/mutual",
+                    "iasmartweb/ideabox",
                     'role::docker::sites$',
                     '/srv/docker_scripts/website-update-all-images.sh'
                 )
