@@ -3,11 +3,13 @@ RUN mkdir /home/imio/imio-website
 COPY *.cfg /home/imio/imio-website/
 COPY Makefile /home/imio/imio-website/
 COPY *.py /home/imio/imio-website/
+COPY *.txt /home/imio/imio-website/
 RUN chown imio:imio -R /home/imio/imio-website/
 WORKDIR /home/imio/imio-website
 USER imio
-RUN /usr/bin/python bootstrap.py -c prod.cfg &&\
-    make buildout-prod
+RUN virtualenv . &&\
+    ./bin/pip install -r requirements.txt &&\
+    bin/buildout -t 22 -c prod.cfg
 USER root
 RUN apt-get remove -y gcc python-dev &&\
     apt-get autoremove -y &&\
