@@ -32,9 +32,10 @@ cleanall:
 docker-image:
 	docker build --pull -t docker-staging.imio.be/iasmartweb/ideabox:latest .
 
-buildout-prod: bin/buildout
-    # used in docker build
-	bin/buildout -t 22 -c prod.cfg
+buildout-prod:
+	# used in docker build
+	pip install --user -I -r requirements.txt
+	~/.local/bin/buildout -t 22 -c prod.cfg
 
 .env:
 	echo uid=${UID} > .env
@@ -46,3 +47,9 @@ build: .env
 
 up: .env
 	docker-compose up
+
+pip:
+	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
+
+bin/buildout: pip
+	./bin/pip install -r requirements.txt
