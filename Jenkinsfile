@@ -1,8 +1,59 @@
 @Library('jenkins-pipeline-scripts') _
 
-iasmartwebDeliveryPipeline(
-    buildId: "${env.BUILD_ID}",
-    imageName: "iasmartweb/ideabox",
-    role: 'role::docker::sites$',
-    updateScript: 'systemctl restart website-ideabox.service'
-)
+pipeline {
+    agent none
+    triggers {
+        pollSCM('*/3 * * * *')
+    }
+    options {
+        // Keep the 50 most recent builds
+        buildDiscarder(logRotator(numToKeepStr:'30'))
+    }
+    stages {
+        stage('Build') {
+            agent any
+            steps {
+                sh 'make docker-image'
+            }
+        }
+        stage('Push image to registry') {
+            agent any
+            steps {
+                pushImageToRegistry (
+                    env.BUILD_ID,
+                    'ideabox/mutual'
+                )
+            }
+        }
+        stage('Deploy to staging') {
+            agent any
+            when {
+                expression {
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+            steps {
+                sh "mco shell run 'docker pull docker-staging.imio.be/ideabox/mutual:$BUILD_ID' -I /^staging.imio.be/"
+                sh "mco shell run 'systemctl restart ideabox.service' -I /^staging.imio.be/"
+            }
+        }
+        stage('Deploy to prod') {
+            agent any
+            when {
+                expression {
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+            steps {
+                sh "docker pull docker-staging.imio.be/ideabox/mutual:$BUILD_ID"
+                sh "docker tag docker-staging.imio.be/ideabox/mutual:$BUILD_ID docker-prod.imio.be/ideabox/mutual:$BUILD_ID"
+                sh "docker tag docker-staging.imio.be/ideabox/mutual:$BUILD_ID docker-prod.imio.be/ideabox/mutual:latest"
+                sh "docker push docker-prod.imio.be/ideabox/mutual"
+                sh "docker rmi docker-staging.imio.be/ideabox/mutual:$BUILD_ID"
+                sh "docker rmi docker-prod.imio.be/ideabox/mutual:latest"
+                sh "docker rmi docker-prod.imio.be/ideabox/mutual:$BUILD_ID"
+                sh "mco shell run 'docker pull docker-prod.imio.be/ideabox/mutual:$BUILD_ID' -I /^ideabox.imio.be/"
+            }
+        }
+    }
+}
