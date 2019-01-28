@@ -30,7 +30,7 @@ cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf
 
 docker-image:
-	docker build --pull -t docker-staging.imio.be/iasmartweb/ideabox:latest .
+	docker build --pull -t docker-staging.imio.be/ideabox/mutual:latest .
 
 buildout-prod:
 	# used in docker build
