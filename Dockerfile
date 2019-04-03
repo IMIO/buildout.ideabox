@@ -4,7 +4,8 @@ ENV PATH="/home/imio/.local/bin:${PATH}" \
     ZEO_PORT=8100 \
     HOSTNAME_HOST=local \
     PROJECT_ID=ideabox \
-    HOME=/home/imio
+    HOME=/home/imio \
+    BEAKER_SECRET=secret
 RUN mkdir /home/imio/plone
 COPY Makefile *.cfg *.txt /home/imio/plone/
 RUN buildDeps="libpq-dev wget git python-virtualenv gcc libc6-dev libpcre3-dev libssl-dev libxml2-dev libxslt1-dev libbz2-dev libffi-dev libjpeg62-dev libopenjp2-7-dev zlib1g-dev python-dev" \
