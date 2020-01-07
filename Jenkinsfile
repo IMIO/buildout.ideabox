@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                 echo "mco shell run 'docker pull docker-staging.imio.be/ideabox/mutual:$BUILD_ID' -I /^staging.imio.be/"
-                echo "mco shell run 'systemctl restart ideabox.service' -I /^staging.imio.be/"
+                echo "mco shell run 'systemctl restart website-ideabox.service' -I /^staging.imio.be/"
             }
         }
         stage('Deploy to prod') {
