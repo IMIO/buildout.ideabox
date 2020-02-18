@@ -1,61 +1,60 @@
 #!/usr/bin/make
-#
-all: run
-VERSION=`cat version.txt`
-#BUILD_NUMBER := debug1
-UID := $(shell id -u)
-PROJECTID := $(shell basename "${PWD}")
+
+IMAGE_NAME="docker-staging.imio.be/ideabox/mutual:5.2.1"
+
+build: dev
+
+bin/pip:
+	python3 -m venv .
+
+run: bin/instance
+	bin/instance fg
+
+docker-image: eggs
+	docker build --pull -t ideabox/mutual:5.2.1 .
+
+cleanall:
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg local lib64
+	docker-compose down
+
+bash:
+	docker-compose run --rm -p 8080:8080 -u imio instance bash
+
+var/filestorage:
+	mkdir -p var/filestorage
+
+var/blobstorage:
+	mkdir -p var/blobstorage
 
 buildout.cfg:
 	ln -fs dev.cfg buildout.cfg
-	#ln -fs prod.cfg buildout.cfg
 
-bin/buildout: buildout.cfg
-	python bootstrap.py
-
-.PHONY: buildout
-buildout:
-	make build
-
-.PHONY: robot-server
-robot-server:
-	bin/robot-server -v cpskin.policy.testing.CPSKIN_POLICY_ROBOT_TESTING
-
-.PHONY: run
-run: build
-	make up
-
-.PHONY: cleanall
-cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf
-
-docker-image:
-	docker build --pull -t ideabox/mutual:latest .
-
-buildout-prod:
-	# used in docker build
-	pip install --user -I -r requirements.txt
-	~/.local/bin/buildout -t 22 -c prod.cfg
-
-.env:
-	echo uid=${UID} > .env
-
-build: .env
-	docker-compose pull
-	docker-compose run zeo /usr/bin/python bootstrap.py -c docker-dev.cfg
-	docker-compose run zeo bin/buildout -c docker-dev.cfg
-
-up: .env
-	docker-compose up
-
-pip:
-	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
-
-bin/buildout: pip
-	./bin/pip install -r requirements.txt
-
-dev:
-	ln -fs dev.cfg buildout.cfg
-	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
+dev: bin/pip buildout.cfg
 	./bin/pip install -r requirements.txt
 	./bin/buildout -t 30
+
+bin/buildout: dev
+
+eggs:  ## Copy eggs from docker image to speed up docker build
+	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
+	mkdir -p eggs
+
+data:
+	mkdir data
+
+fix-data-permissions: data
+	sudo chown $(USER):$(USER) data
+	docker-compose run --entrypoint="" --rm -u root zeo chown -R imio:imio /data
+
+docker-build: eggs
+	docker-compose build
+	make fix-data-permissions
+
+create-plonesite: fix-data-permissions
+	docker-compose run instance bin/instance run scripts/create_plonesite.py
+
+bin/intance: bin/buildout
+
+upgrade: bin/instance
+	docker-compose run instance bin/instance run scripts/run_portal_upgrades
+
