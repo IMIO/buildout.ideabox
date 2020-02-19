@@ -2,27 +2,24 @@
 
 pipeline {
     agent none
-    triggers {
-        pollSCM('*/3 * * * *')
-    }
     options {
-        // Keep the 50 most recent builds
         buildDiscarder(logRotator(numToKeepStr:'30'))
     }
     stages {
         stage('Build') {
             agent any
             steps {
+                sh 'make eggs'
                 sh 'make docker-image'
             }
         }
         stage('Push image to registry') {
             agent any
             steps {
-                pushImageToRegistry (
-                    env.BUILD_ID,
-                    'ideabox/mutual'
-                )
+                sh "docker tag ideabox/mutual:5.2.1 docker-staging.imio.be/ideabox/mutual:5.2.1"
+                sh "docker tag ideabox/mutual:5.2.1 docker-staging.imio.be/ideabox/mutual:5.2.1-$BUILD_ID"
+                sh "docker push docker-staging.imio.be/ideabox/mutual:5.2.1"
+                sh "docker push docker-staging.imio.be/ideabox/mutual:5.2.1-$BUILD_ID"
             }
         }
         stage('Deploy to staging') {
@@ -33,26 +30,15 @@ pipeline {
                 }
             }
             steps {
-                echo "mco shell run 'docker pull docker-staging.imio.be/ideabox/mutual:$BUILD_ID' -I /^staging.imio.be/"
-                echo "mco shell run 'systemctl restart website-ideabox.service' -I /^staging.imio.be/"
+                sh "mco shell run 'docker pull docker-staging.imio.be/ideabox/mutual:5.2.1-$BUILD_ID' -I /^staging.imio.be/"
+                sh "mco shell run 'systemctl restart website-ideabox.service' -I /^staging.imio.be/"
             }
         }
-        stage('Deploy to prod') {
-            agent any
-            when {
-                expression {
-                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
-                }
-            }
-            steps {
-                sh "docker pull docker-staging.imio.be/ideabox/mutual:$BUILD_ID"
-                sh "docker tag docker-staging.imio.be/ideabox/mutual:$BUILD_ID docker-prod.imio.be/ideabox/mutual:$BUILD_ID"
-                sh "docker tag docker-staging.imio.be/ideabox/mutual:$BUILD_ID docker-prod.imio.be/ideabox/mutual:latest"
-                sh "docker push docker-prod.imio.be/ideabox/mutual"
-                sh "docker rmi docker-staging.imio.be/ideabox/mutual:$BUILD_ID"
-                sh "docker rmi docker-prod.imio.be/ideabox/mutual:latest"
-                sh "docker rmi docker-prod.imio.be/ideabox/mutual:$BUILD_ID"
-                echo "mco shell run 'docker pull docker-prod.imio.be/ideabox/mutual:$BUILD_ID' -I /^ideabox.imio.be/"
+    }
+    post {
+        always {
+            node(null)  {
+                sh "#rm -rf eggs/"
             }
         }
     }

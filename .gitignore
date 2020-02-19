@@ -17,3 +17,5 @@ share/
 pip-selfcheck.json
 local/
 .env
+lib64
+pyvenv.cfg
