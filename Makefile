@@ -59,5 +59,5 @@ upgrade: bin/instance
 	docker-compose run instance bin/instance run scripts/run_portal_upgrades
 
 rsync: var/filestorage var/blobstorage
-	rsync -rP imio@staging.imio.be:/srv/instances/ideabox/filestorage/Data.fs var/filestorage/Data.fs
-	rsync -r --info=progress2 imio@staging.imio.be:/srv/instances/ideabox/blobstorage/ var/blobstorage/
+	rsync -rP imio@pre-prod3.imio.be:/srv/instances/marcheid/filestorage/Data.fs var/filestorage/Data.fs
+	rsync -r --info=progress2 imio@pre-prod3.imio.be:/srv/instances/marcheid/blobstorage/ var/blobstorage/
