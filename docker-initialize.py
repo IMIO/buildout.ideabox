@@ -160,7 +160,7 @@ class Environment(object):
             with open(self.zope_conf, "r") as cfile:
                 config = cfile.read()
                 for replacement in replacements:
-                    config.replace(replacement, "")
+                    config = config.replace(replacement, "")
             with open(self.zope_conf, "w") as cfile:
                 cfile.write(config)
 
