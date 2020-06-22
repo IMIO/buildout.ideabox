@@ -15,10 +15,10 @@ class Environment(object):
     def __init__(
         self,
         env=os.environ,
-        zope_conf="/plone/instance/parts/instance/etc/zope.conf",
-        custom_conf="/plone/instance/custom.cfg",
-        zeopack_conf="/plone/instance/bin/zeopack",
-        zeoserver_conf="/plone/instance/parts/zeoserver/etc/zeo.conf",
+        zope_conf="/plone/parts/instance/etc/zope.conf",
+        custom_conf="/plone/custom.cfg",
+        zeopack_conf="/plone/bin/zeopack",
+        zeoserver_conf="/plone/parts/zeoserver/etc/zeo.conf",
     ):
         self.env = env
         self.zope_conf = zope_conf
