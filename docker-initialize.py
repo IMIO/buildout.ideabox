@@ -147,11 +147,29 @@ class Environment(object):
         with open(self.custom_conf, "w") as cfile:
             cfile.write(buildout)
 
+    def middleware(self):
+        """ Ensure to remove undefined values for middleware to avoid errors """
+        variables = ["CLIENT_ID", "APPLICATION_ID", "WS_URL", "APPLICATION_URL"]
+        replacements = []
+        for variable in variables:
+            value = self.env.get(variable, None)
+            if value is None:
+                replacements.append("$({})".format(variable))
+        if replacements:
+            config = ""
+            with open(self.zope_conf, "r") as cfile:
+                config = cfile.read()
+                for replacement in replacements:
+                    config.replace(replacement, "")
+            with open(self.zope_conf, "w") as cfile:
+                cfile.write(config)
+
     def setup(self, **kwargs):
         self.buildout()
         self.zeoclient()
         self.zeopack()
         self.zeoserver()
+        self.middleware()
 
     __call__ = setup
 
