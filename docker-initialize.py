@@ -169,7 +169,7 @@ class Environment(object):
         self.zeoclient()
         self.zeopack()
         self.zeoserver()
-        self.middleware()
+        # self.middleware()
 
     __call__ = setup
 
