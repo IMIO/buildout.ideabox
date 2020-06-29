@@ -17,3 +17,4 @@ share/
 pip-selfcheck.json
 local/
 .env
+eggs/

@@ -12,6 +12,7 @@ pipeline {
         stage('Build') {
             agent any
             steps {
+                sh 'make eggs'
                 sh 'make docker-image'
             }
         }

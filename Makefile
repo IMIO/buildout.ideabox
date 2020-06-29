@@ -5,6 +5,7 @@ VERSION=`cat version.txt`
 #BUILD_NUMBER := debug1
 UID := $(shell id -u)
 PROJECTID := $(shell basename "${PWD}")
+IMAGE_NAME="docker-staging.imio.be/iasmartweb/ideabox:latest"
 
 buildout.cfg:
 	ln -fs dev.cfg buildout.cfg
@@ -53,3 +54,7 @@ pip:
 
 bin/buildout: pip
 	./bin/pip install -r requirements.txt
+
+eggs:  ## Copy eggs from docker image to speed up docker build
+	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /home/imio/.buildout eggs | tar x
+	mkdir -p eggs
