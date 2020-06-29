@@ -1,24 +1,25 @@
 version: '3.4'
 services:
   zeo:
-    image: docker-staging.imio.be/iasmartweb/test:${uid}
+    image: iasmartweb/ideabox
     user: imio
     environment:
         - HOME=/home/imio
     volumes:
-        - .:/home/imio/imio-website
+        - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
+        - ./var/filestorage:/home/imio/imio-website/var/filestorage
     working_dir: /home/imio/imio-website
     command: /home/imio/imio-website/bin/zeoserver fg
   instance:
-    image: docker-staging.imio.be/iasmartweb/test:${uid}
+    image: iasmartweb/ideabox
     user: imio
     ports:
       - "8081:8081"
     links:
       - zeo:db
-    volumes:
-      - .:/home/imio/imio-website
     working_dir: /home/imio/imio-website
+    volumes:
+        - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
     environment:
       - MEMCACHE_SERVER=127.0.0.1
       - MEMCACHE_DEFAULT_AGE=10800

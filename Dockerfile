@@ -19,11 +19,12 @@ WORKDIR /home/imio/imio-website
 
 COPY --chown=imio --from=builder /home/imio/.buildout /home/imio/.buildout
 COPY --chown=imio --from=builder /home/imio/imio-website .
+COPY --chown=imio --from=builder /usr/local/lib/python2.7/site-packages /usr/local/lib/python2.7/site-packages
+COPY --chown=imio --from=builder /home/imio/.local/lib/python2.7/site-packages /home/imio/.local/lib/python2.7/site-packages
 
-RUN runDeps="poppler-utils wv rsync lynx netcat libxml2 libxslt1.1 libjpeg62 libtiff5 libopenjp2-7" \
+RUN runDeps="python poppler-utils wv rsync lynx netcat libxml2 libxslt1.1 libjpeg62 libtiff5 libopenjp2-7" \
   && apt-get update \
   && apt-get install -y --no-install-recommends $runDeps \
-  && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 USER imio
