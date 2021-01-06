@@ -1,46 +1,11 @@
 @Library('jenkins-pipeline-scripts') _
 
-pipeline {
-    agent none
-    options {
-        buildDiscarder(logRotator(numToKeepStr:'30'))
-    }
-    stages {
-        stage('Build') {
-            agent any
-            steps {
-                sh 'make eggs'
-                sh 'make docker-image'
-            }
-        }
-        stage('Push image to registry') {
-            agent any
-            steps {
-                sh "docker tag ideabox/mutual:5.2.1 docker-staging.imio.be/ideabox/mutual:5.2.1"
-                sh "docker tag ideabox/mutual:5.2.1 docker-staging.imio.be/ideabox/mutual:5.2.1-$BUILD_ID"
-                sh "docker push docker-staging.imio.be/ideabox/mutual:5.2.1"
-                sh "docker push docker-staging.imio.be/ideabox/mutual:5.2.1-$BUILD_ID"
-            }
-        }
-        stage('Deploy to staging') {
-            agent any
-            when {
-                expression {
-                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
-                }
-            }
-            steps {
-                sh "mco shell run 'docker pull docker-staging.imio.be/ideabox/mutual:5.2.1-$BUILD_ID' -I /^staging.imio.be/"
-                sh "mco shell run 'systemctl restart website-ideabox.service' -I /^staging.imio.be/"
-                sh "mco shell run 'systemctl restart website-liege2025.service' -I /^staging.imio.be/"
-            }
-        }
-    }
-    post {
-        always {
-            node(null)  {
-                sh "rm -rf eggs/"
-            }
-        }
-    }
-}
+dockerDeliveryPipeline (
+  imageName: "ideabox/mutual",
+  productId: "ideabox",
+  updateStagingRundeckJobId: "a80f9c0f-b25f-46e1-8f07-497614f70d8c",
+  updateRundeckJobId: "b5031529-4583-439f-a5d7-05eacd6e04b8",
+  updateNowRundeckJobId: "e0084b80-eed5-41b4-aa23-01c6bb68ff27",
+  suffixEmail: "support-web",
+)
+
