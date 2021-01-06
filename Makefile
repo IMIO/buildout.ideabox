@@ -1,6 +1,6 @@
 #!/usr/bin/make
 
-IMAGE_NAME="docker-staging.imio.be/ideabox/mutual:5.2.1"
+IMAGE_NAME="docker-staging.imio.be/ideabox/mutual:latest"
 
 build: dev
 
@@ -11,7 +11,7 @@ run: bin/instance
 	bin/instance fg
 
 docker-image: eggs
-	docker build --pull -t ideabox/mutual:5.2.1 .
+	docker build --pull -t ideabox/mutual:latest .
 
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg local lib64
