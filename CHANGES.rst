@@ -4,7 +4,10 @@ CHANGELOG
 5.2.3-2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.restapi 1.0b3
+
+    - Update french translations
+      [mpeeters]
 
 
 5.2.3-1 (2021-02-04)
