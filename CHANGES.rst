@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-5.2.3-2 (unreleased)
+5.2.3-2 (2021-02-16)
 --------------------
 
 - ideabox.restapi 1.0b3
