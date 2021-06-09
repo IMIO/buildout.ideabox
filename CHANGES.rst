@@ -4,7 +4,11 @@ CHANGELOG
 5.2.3-3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.policy 3.4.1
+
+  - Create legal_information_text field in control panel
+    [boulch]
+
 
 
 5.2.3-2 (2021-02-16)
