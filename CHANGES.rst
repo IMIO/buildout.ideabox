@@ -4,6 +4,11 @@ CHANGELOG
 5.2.3-3 (unreleased)
 --------------------
 
+- imio.gdpr 1.1.1
+
+  - Fix unicode error in Plone52 
+    [boulch]
+
 - ideabox.policy 3.4.2
   
   - Change "zip_code" field label to "zip code / locality" in user registration form. 
