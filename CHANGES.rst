@@ -4,8 +4,10 @@ CHANGELOG
 5.2.3-3 (unreleased)
 --------------------
 
-- ideabox.policy 3.4.1
-
+- ideabox.policy 3.4.2
+  
+  - Change "zip_code" field label to "zip code / locality" in user registration form. 
+    [boulch]
   - Create legal_information_text field in control panel
     [boulch]
 
