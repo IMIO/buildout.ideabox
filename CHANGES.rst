@@ -4,7 +4,8 @@ CHANGELOG
 5.2.3-4 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Add new product : collective.easyform (3.0.5) in buildout.
+  [boulch]
 
 
 5.2.3-3 (2021-06-10)
