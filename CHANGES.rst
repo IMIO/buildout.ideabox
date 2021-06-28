@@ -4,6 +4,15 @@ CHANGELOG
 5.2.3-4 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.3
+
+  - Update faceted xml configuration. Add a workflow "draft" filter on projects. (Don't keep projects in draft state)
+    [boulch]
+  - Add a project_directly_submitted checkbox field in ideabox controlpanel to choice is project can be directly submitted
+    [boulch]
+  - Add campaign_emails field on campaign type to send mails only on to these campaign managers
+    [boulch]
+
 - Add new product : collective.easyform (3.0.5) in buildout.
   [boulch]
 
