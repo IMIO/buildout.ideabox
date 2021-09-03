@@ -30,7 +30,7 @@ COPY --chown=imio scripts /plone/scripts
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
 
 
-FROM docker-staging.imio.be/base:alpinepy3
+FROM imiobe/base:py3-alpine
 
 ENV PIP=9.0.3 \
   ZC_BUILDOUT=2.13.2 \
