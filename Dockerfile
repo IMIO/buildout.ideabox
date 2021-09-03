@@ -1,4 +1,4 @@
-FROM docker-staging.imio.be/base:alpinepy3 as builder
+FROM imiobe/base:py3-alpine as builder
 ENV PIP=9.0.3 \
   ZC_BUILDOUT=2.13.2 \
   SETUPTOOLS=41.2.0 \
@@ -24,7 +24,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
   && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT wheel==$WHEEL
 WORKDIR /plone
 RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
-COPY --chown=imio eggs /plone/eggs/
+#COPY --chown=imio eggs /plone/eggs/
 COPY --chown=imio *.cfg /plone/
 COPY --chown=imio scripts /plone/scripts
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
