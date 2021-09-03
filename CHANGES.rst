@@ -4,7 +4,13 @@ CHANGELOG
 5.2.3-5 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.theme 1.0.1
+
+  - Add diazo rules to remove dashboard and preferences out of membertools menu
+  [boulch]
+
+  - Simplify config for TTW LESS edition
+  [laulaz]
 
 
 5.2.3-4 (2021-06-28)
