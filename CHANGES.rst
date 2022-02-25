@@ -4,7 +4,11 @@ CHANGELOG
 5.2.3-6 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.policy 3.4.4
+
+  - Add package : collective.anonymouseditpatterns. 
+    Fix some widgets In our case, fix datetime picker in @@register form (in anonymous mode)
+    [boulch]
 
 
 5.2.3-5 (2021-09-03)
@@ -13,10 +17,10 @@ CHANGELOG
 - ideabox.theme 1.0.1
 
   - Add diazo rules to remove dashboard and preferences out of membertools menu
-  [boulch]
+    [boulch]
 
   - Simplify config for TTW LESS edition
-  [laulaz]
+    [laulaz]
 
 
 5.2.3-4 (2021-06-28)
