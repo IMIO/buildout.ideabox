@@ -41,7 +41,9 @@ ENV PIP=9.0.3 \
   ZEO_HOST=zeo \
   ZEO_PORT=8100 \
   HOSTNAME_HOST=local \
-  PROJECT_ID=ideabox
+  PROJECT_ID=ideabox \
+  PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,ideabox.policy:default \
+  DEFAULT_LANGUAGE=fr
 
 RUN mkdir /data && chown imio:imio -R /data
 VOLUME /data/blobstorage

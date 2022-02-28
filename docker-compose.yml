@@ -19,6 +19,10 @@ services:
     command: /home/imio/plone/bin/instance fg
     labels:
       - "traefik.frontend.rule=Host:localhost; AddPrefix: /VirtualHostBase/http/localhost/plone/VirtualHostRoot"
+    environment:
+      - PLONE_EXTENSION_IDS=plone.app.caching:default,plonetheme.barceloneta:default,ideabox.policy:default
+      - DEFAULT_LANGUAGE=fr
+      - ACTIVE_BIGBANG=True        
 
   reverseproxy:
     image: traefik
