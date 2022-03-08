@@ -4,6 +4,11 @@ CHANGELOG
 5.2.3-6 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.6
+
+  - Fix bad include instruction
+    [boulch]
+
 - ideabox.policy 3.4.5
 
   - Add collective.big.bang dependency
