@@ -13,6 +13,9 @@ run: bin/instance
 docker-image: eggs
 	docker build --pull -t ideabox/mutual:latest .
 
+test-image:
+	echo test
+
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg local lib64
 	docker-compose down
