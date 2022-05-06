@@ -4,7 +4,16 @@ CHANGELOG
 5.2.3-7 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.policy 3.4.7
+
+  - Fix js error : Uncaught ReferenceError: ploneFormTabbing is not defined
+    [boulch]
+
+  - Avoid a double translation for localized month
+    [mpeeters]
+
+  - auto-install imio.gdpr , collective.excelexport
+    [boulch]
 
 
 5.2.3-6 (2022-03-16)
