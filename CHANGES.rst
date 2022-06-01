@@ -4,6 +4,20 @@ CHANGELOG
 5.2.3-7 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.8
+
+  - Add new geolocated faceted view
+    [boulch]
+
+  - Add geolocation field to project content type
+    [boulch]
+
+  - Move project_image (leadimage) to project content type
+    [boulch]
+
+- Adapt code to sort priority action progress by latest to oldest elements
+  [mpeeters]
+
 - ideabox.policy 3.4.7
 
   - Fix js error : Uncaught ReferenceError: ploneFormTabbing is not defined
