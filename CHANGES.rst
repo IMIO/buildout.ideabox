@@ -4,6 +4,17 @@ CHANGELOG
 5.2.3-7 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.9
+
+  - Add endpoints to get projects themes and projects districts
+    [boulch]
+
+  - Refactor default_image project and take project leadimage in consideration
+    [boulch]
+
+  - Add map and coordinates in project template
+    [boulch]
+
 - ideabox.policy 3.4.8
 
   - Add new geolocated faceted view
