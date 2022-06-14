@@ -4,6 +4,11 @@ CHANGELOG
 5.2.3-7 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.11
+  
+  - Add missing interface to geolocating projects
+    [boulch]
+
 - ideabox.policy 3.4.10
 
   - if ts_project_submission_path is not None, we redirect to this form instead of ideabox citizen default form.
