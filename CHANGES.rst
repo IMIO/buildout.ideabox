@@ -4,7 +4,13 @@ CHANGELOG
 5.2.3-8 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.policy 3.4.12
+
+  - Fix image display in projects template
+    [boulch]
+
+  - Add ts_project_submission_path field on campaign to specify an off site project form by campaign
+    [boulch]
 
 
 5.2.3-7 (2022-06-14)
