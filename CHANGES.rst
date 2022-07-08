@@ -4,6 +4,9 @@ CHANGELOG
 5.2.3-8 (unreleased)
 --------------------
 
+- Update Plone from 5.2.5 to 5.2.8
+  [boulch]
+
 - ideabox.policy 3.4.12
 
   - Fix image display in projects template
