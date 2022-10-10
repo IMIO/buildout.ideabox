@@ -4,6 +4,11 @@ CHANGELOG
 5.2.3-8 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.13
+
+  - SUP-24435: Fix random sort
+    [mpeeters]
+
 - Update Plone from 5.2.5 to 5.2.8
   [boulch]
 
