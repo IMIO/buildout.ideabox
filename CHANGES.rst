@@ -4,7 +4,10 @@ CHANGELOG
 5.2.3-9 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.policy 3.4.14
+
+  - Fix project, explorer faceted and tests
+    [boulch]
 
 
 5.2.3-8 (2022-10-11)
