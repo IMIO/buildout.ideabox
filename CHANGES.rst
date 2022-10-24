@@ -4,7 +4,11 @@ CHANGELOG
 5.2.3-10 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- Use ubuntu as Docker base image instead of Alpine.
+  [bsuttor]
+
+- Add py-spy to debug python process.
+  [bsuttor]
 
 
 5.2.3-9 (2022-10-19)
