@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-5.2.3-10 (unreleased)
+5.2.3-10 (2022-10-25)
 ---------------------
 
 - Update rundeck job ids.
