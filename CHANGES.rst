@@ -4,6 +4,9 @@ CHANGELOG
 5.2.3-10 (unreleased)
 ---------------------
 
+- Update rundeck job ids.
+  [bsuttor]
+
 - Use ubuntu as Docker base image instead of Alpine.
   [bsuttor]
 

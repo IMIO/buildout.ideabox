@@ -4,8 +4,8 @@ dockerDeliveryPipeline (
   imageName: "ideabox/mutual",
   productId: "ideabox",
   updateStagingRundeckJobId: "4d440cfd-da29-4d55-8a31-dac9dc0c97b1",
-  updateRundeckJobId: "b5031529-4583-439f-a5d7-05eacd6e04b8",
-  updateNowRundeckJobId: "e0084b80-eed5-41b4-aa23-01c6bb68ff27",
+  updateRundeckJobId: "c199a64a-91b0-4773-bdd0-d1badac560c2",
+  updateNowRundeckJobId: "c199a64a-91b0-4773-bdd0-d1badac560c2",
   suffixEmail: "support-web",
 )
 
