@@ -1,8 +1,8 @@
 CHANGELOG
 =========
 
-5.2.8-2 (unreleased)
---------------------
+5.2.8-quick-2 (2022-10-26)
+--------------------------
 
 - Downgrade waitress to 1.4.4 to try to remove 100% CPU consumption.
   [bsuttor]
