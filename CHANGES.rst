@@ -4,7 +4,10 @@ CHANGELOG
 5.2.8-3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.policy 3.4.15
+
+  - WEB-3782 : Fix redirection to login form when rating a project.
+    [boulch]
 
 
 5.2.8-quick-2 (2022-10-26)
