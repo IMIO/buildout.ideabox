@@ -4,6 +4,17 @@ CHANGELOG
 5.2.8-3 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.16
+
+  - Use request/HTTP_REFERER instead of absolute_url to redirect on real/good referer
+    [boulch]
+
+  - Move div to avoid click on vote counter. (Bring confusion cause of project redirection)
+    [boulch]
+
+  - Update / Add some translations
+    [boulch]
+
 - ideabox.policy 3.4.15
 
   - WEB-3782 : Fix redirection to login form when rating a project.
