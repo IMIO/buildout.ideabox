@@ -10,7 +10,7 @@ bin/pip:
 run: bin/instance
 	bin/instance fg
 
-docker-image: eggs
+docker-image:
 	docker build --pull -t ideabox/mutual:latest .
 
 test-image:
