@@ -4,7 +4,13 @@ CHANGELOG
 5.2.8-4 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ideabox.policy 3.4.17
+
+  - Add option in control panel to choice if projects status must be display in campaign faceted view
+    [boulch]
+
+  - [MIDBOXMSCA-5] Display projects status in campaign faceted view
+    [boulch]
 
 
 5.2.8-3 (2022-11-16)
