@@ -4,6 +4,11 @@ CHANGELOG
 5.2.8-4 (unreleased)
 --------------------
 
+- ideabox.theme 1.0.3
+
+  - Add some css to customize projects status in faceted view
+    [jhero]
+
 - ideabox.policy 3.4.17
 
   - Add option in control panel to choice if projects status must be display in campaign faceted view
