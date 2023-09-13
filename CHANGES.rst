@@ -4,6 +4,11 @@ CHANGELOG
 5.2.8-4 (unreleased)
 --------------------
 
+- ideabox.policy 3.4.18
+
+  - MIDBOXMSCA-9 : Fix : Set geolocation field when project is submited by a citizen
+    [boulch]
+
 - ideabox.theme 1.0.3
 
   - Add some css to customize projects status in faceted view
