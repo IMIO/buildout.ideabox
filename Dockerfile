@@ -1,4 +1,4 @@
-FROM imiobe/base:py3-ubuntu-20.04 as builder
+FROM harbor.imio.be/common/base:py3-ubuntu-20.04 as builder
 ENV PIP=9.0.3 \
   ZC_BUILDOUT=2.13.2 \
   SETUPTOOLS=41.2.0 \
